@@ -1,0 +1,13 @@
+.courses {
+  padding: 30px;
+}
+
+.courses h2 {
+  margin-bottom: 20px;
+}
+
+.course-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
