@@ -1,5 +1,6 @@
 import React from "react";
 import { enrollCourse } from "../services/api";
+import "./Coursecard.css";
 
 function CourseCard({ course }) {
 

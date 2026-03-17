@@ -31,9 +31,10 @@ function Login() {
             <h2>Login</h2>
 
             <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-            <input placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
 
             <button onClick={handleLogin}>Login</button>
+            <p onClick={() => navigate("/register")}>Don't have an account? Register</p>
         </div>
     );
 }

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getDashboard } from "../services/api";
 
 function Dashboard() {
+  const navigate = useNavigate();
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -11,6 +13,10 @@ function Dashboard() {
   const fetchDashboard = async () => {
     try {
       const studentId = localStorage.getItem("studentId");
+      if (!studentId) {
+        navigate("/");
+        return;
+      }
 
       const res = await getDashboard(studentId);
       setData(res.data);

@@ -24,7 +24,7 @@ router.post("/enroll", async (req, res) => {
 
   await student.save();
 
-  res.send("Enrolled successfully");
+  res.json({ message: "Enrolled successfully", student });
 });
 
 module.exports = router;
