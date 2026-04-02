@@ -18,7 +18,11 @@ function Register() {
 
       navigate("/");
     } catch (err) {
-      alert("Registration Failed ❌");
+      if (err?.response?.status === 409) {
+        alert("This email is already registered. Please use another email.");
+      } else {
+        alert("Registration Failed ❌");
+      }
       console.log(err);
     }
   };

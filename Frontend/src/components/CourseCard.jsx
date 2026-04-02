@@ -1,30 +1,20 @@
 import React from "react";
-import { enrollCourse } from "../services/api";
+import { useNavigate } from "react-router-dom";
 import "./Coursecard.css";
 
 function CourseCard({ course }) {
+  const navigate = useNavigate();
 
-  const handleEnroll = async () => {
-    try {
-      const studentId = localStorage.getItem("studentId"); // store after login
-
-      await enrollCourse({
-        studentId,
-        courseId: course._id,
-      });
-
-      alert("Enrolled Successfully ✅");
-    } catch (err) {
-      console.log(err);
-      alert("Enrollment Failed ❌");
-    }
+  const handleEnroll = () => {
+    navigate(`/enroll/${course._id}`, { state: { course } });
   };
 
   return (
-    <div className="course-card">
+    <div className="catalog-course-card">
+      <p className="catalog-course-pill">Open Enrollment</p>
       <h3>{course.title}</h3>
-      <p>{course.instructor}</p>
-      <p>{course.duration}</p>
+      <p className="catalog-course-meta"><span>Instructor:</span> {course.instructor}</p>
+      <p className="catalog-course-meta"><span>Duration:</span> {course.duration}</p>
 
       <button onClick={handleEnroll}>Enroll</button>
     </div>

@@ -9,16 +9,29 @@ router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "Name, email and password are required" });
+    }
+
+    const normalizedEmail = String(email).toLowerCase().trim();
+    const existingStudent = await Student.findOne({ email: normalizedEmail });
+    if (existingStudent) {
+      return res.status(409).json({ message: "Email already registered" });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const student = await Student.create({
       name,
-      email,
+      email: normalizedEmail,
       password: hashedPassword
     });
 
     res.json(student);
   } catch (err) {
+    if (err && err.code === 11000) {
+      return res.status(409).json({ message: "Email already registered" });
+    }
     res.status(500).json(err);
   }
 });
